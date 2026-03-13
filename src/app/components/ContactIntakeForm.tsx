@@ -332,7 +332,7 @@ export default function ContactIntakeForm() {
               type="text"
               value={data.country}
               onChange={(e) => update('country', e.target.value)}
-              placeholder="Example: Nigeria"
+              placeholder="Example: United States"
               className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm outline-none transition-all focus:border-primary-600 focus:ring-2 focus:ring-primary-100"
             />
             {errors.country && <p className="mt-1 text-sm text-error-500">{errors.country}</p>}
@@ -392,7 +392,7 @@ export default function ContactIntakeForm() {
                 type="text"
                 value={data.institutionName}
                 onChange={(e) => update('institutionName', e.target.value)}
-                placeholder="Example: Binance / GTBank"
+                placeholder="Example: Coinbase / Chase"
                 className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm outline-none transition-all focus:border-primary-600 focus:ring-2 focus:ring-primary-100"
               />
             </div>
@@ -518,7 +518,7 @@ export default function ContactIntakeForm() {
                 type="text"
                 value={data.timezone}
                 onChange={(e) => update('timezone', e.target.value)}
-                placeholder="GMT+1"
+                placeholder="EST (UTC-5)"
                 className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm outline-none transition-all focus:border-primary-600 focus:ring-2 focus:ring-primary-100"
               />
             </div>
