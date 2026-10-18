@@ -1,9 +1,7 @@
 import type { Metadata } from 'next';
 
-// The site's main public address. Link previews, the sitemap and canonical links use it.
-// The site is also served at ramprecover.vercel.app; canonical links tell search engines that
-// SITE_URL is the main copy, so the two addresses don't compete as duplicates.
-export const SITE_URL = 'https://ramprecover.getfinora.org';
+// The site's public address. Link previews, the sitemap and canonical links use it.
+export const SITE_URL = 'https://ramp-recover.getfinora.org';
 export const SITE_NAME = 'Ramp Recover';
 export const HOME_TITLE = 'Ramp Recover | Scam Recovery Support';
 export const SITE_DESCRIPTION =

@@ -8,7 +8,7 @@
   - [x] Supabase done (October 17, 2026): the database tables `intake_cases` and `intake_attachments` are created with RLS on, and the private `case-evidence` bucket is created (10 MB, images and PDF only). A test case went from the website form into Supabase with both files, then was deleted.
 - [ ] **32. Deployment settings.** 🔒 When deploying (steps in `README.md` → Deploying):
   - **Vercel (website):** `NEXT_PUBLIC_API_URL` = the backend's public URL, and `NEXT_PUBLIC_SMARTSUPP_KEY` = the same key as in `.env.local`. Without the key, the live site has no chat.
-  - **Render/Railway (backend):** everything from `backend/.env`, plus `CORS_ORIGINS=https://ramprecover.getfinora.org,https://ramprecover.vercel.app` and `SITE_URL=https://ramprecover.getfinora.org`.
+  - **Render/Railway (backend):** everything from `backend/.env`, plus `CORS_ORIGINS=https://ramp-recover.getfinora.org` and `SITE_URL=https://ramp-recover.getfinora.org`.
 
 ### Details received (October 17, 2026)
 - [x] **Phone and WhatsApp:** +1 (207) 250-6231. Used in the footer, the header's "24/7 Response" link and the WhatsApp button (`src/app/config/contact.ts`).
@@ -67,11 +67,11 @@
 ## F. New additions
 
 - [x] **21. SEO and sharing.** Done:
-  - **Main address:** https://ramprecover.getfinora.org, set as `SITE_URL` in `src/app/config/site.ts`. The site is also served at ramprecover.vercel.app; every page's canonical link points to the main address, so search engines don't treat the two as duplicates.
+  - **Address:** https://ramp-recover.getfinora.org, set as `SITE_URL` in `src/app/config/site.ts`. DNS set up and live (October 18, 2026). The vercel.app address is no longer used. Every page's canonical link points to this address.
   - **Link previews:** every page has its own title, description and preview tags for WhatsApp, Facebook and X, using the share image (`public/brand/ramp-recover-social.png`).
   - **Search engines:** `/robots.txt` allows indexing and points to `/sitemap.xml`, which lists all 5 pages.
 - [x] **22. Custom 404 page.** Done: branded "We couldn't find that page" page with the header, footer, "Go to home page" and "Start a recovery case" buttons, and helpful links. It returns a real 404 status and tells search engines not to index it.
-- [ ] **30. After launch: Google Search Console.** Add https://ramprecover.getfinora.org to Google Search Console and submit `https://ramprecover.getfinora.org/sitemap.xml`, so Google finds the site sooner.
+- [ ] **30. After launch: Google Search Console.** Add https://ramp-recover.getfinora.org to Google Search Console and submit `https://ramp-recover.getfinora.org/sitemap.xml`, so Google finds the site sooner.
 
 ## G. Content to confirm with the client before launch
 

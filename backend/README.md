@@ -32,7 +32,7 @@ Run the website alongside it (`npm run dev` in the project root). The form posts
 | `RESEND_API_KEY` | Resend → API Keys |
 | `EMAIL_FROM` | Sender on your verified Resend domain, e.g. `Ramp Recover <recover@getfinora.org>` |
 | `TEAM_INBOX` | Where new-case emails go; comma-separated for several |
-| `CORS_ORIGINS` | Website origins allowed to submit, e.g. `https://ramprecover.getfinora.org,https://ramprecover.vercel.app` |
+| `CORS_ORIGINS` | Website origins allowed to submit, e.g. `https://ramp-recover.getfinora.org` |
 | `SITE_URL` | Public website URL, used for the logo and live chat link in emails (optional) |
 
 ## Scripts

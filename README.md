@@ -79,16 +79,16 @@ npm run dev                  # http://localhost:4000
 ## Deploying
 
 - **Backend:** Render or Railway. Steps are in [`backend/README.md`](backend/README.md#deploying-render-or-railway).
-- **Website:** Vercel, served at **https://ramprecover.getfinora.org** (the main address) and **https://ramprecover.vercel.app**.
+- **Website:** Vercel, served at **https://ramp-recover.getfinora.org**.
   1. Deploy from this folder (the repository root).
   2. In the Vercel project's environment variables, set `NEXT_PUBLIC_API_URL` to the backend's public URL and `NEXT_PUBLIC_SMARTSUPP_KEY` to the Smartsupp key. Without the key, the live site has no chat.
   3. In the backend's environment, set:
-     - `CORS_ORIGINS=https://ramprecover.getfinora.org,https://ramprecover.vercel.app`
-     - `SITE_URL=https://ramprecover.getfinora.org`
+     - `CORS_ORIGINS=https://ramp-recover.getfinora.org`
+     - `SITE_URL=https://ramp-recover.getfinora.org`
 
 ### Search engines and link previews
 
-- The main address is `SITE_URL` in `src/app/config/site.ts`. Every page's canonical link, link-preview tags (Open Graph and Twitter/X, using `public/brand/ramp-recover-social.png`) and the sitemap point to it, so the vercel.app copy isn't treated as duplicate content.
+- The site's address is `SITE_URL` in `src/app/config/site.ts`. Every page's canonical link, link-preview tags (Open Graph and Twitter/X, using `public/brand/ramp-recover-social.png`) and the sitemap point to it.
 - `/robots.txt` lets search engines index the site and points them to `/sitemap.xml`. Both are generated from `src/app/robots.ts` and `src/app/sitemap.ts`.
 - To add a page to the sitemap, add it in `src/app/sitemap.ts`, or in `LEGAL_PAGES` in `src/app/config/legal.ts` for legal pages. Give it its own metadata with `pageMetadata()` from `src/app/config/site.ts`.
 
