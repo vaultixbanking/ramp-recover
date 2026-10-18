@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // The API server is a separate Node project with its own type-check and tests.
+    "backend/**",
   ]),
 ]);
 

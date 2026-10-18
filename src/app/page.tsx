@@ -1,19 +1,72 @@
+import Link from 'next/link';
 import Navigation from '@/app/components/Navigation';
 import {
   ArrowRight,
   BadgeCheck,
   Banknote,
   Bitcoin,
+  ClipboardCheck,
   Clock3,
-  Mail,
+  FolderOpen,
+  Landmark,
   MessageCircleMore,
-  Phone,
+  MessageSquareText,
   Quote,
+  Route,
   ShieldAlert,
+  ShieldCheck,
   Star,
   Users,
 } from 'lucide-react';
 import ContactIntakeForm from '@/app/components/ContactIntakeForm';
+import OpenChat from '@/app/components/OpenChat';
+import SiteFooter from '@/app/components/SiteFooter';
+import { HOME_TITLE, SITE_DESCRIPTION, pageMetadata } from '@/app/config/site';
+
+export const metadata = pageMetadata({ title: HOME_TITLE, description: SITE_DESCRIPTION, path: '/' });
+
+const chatLinkClass = 'font-semibold text-primary-700 underline underline-offset-2 hover:text-primary-800';
+const chatButtonClass =
+  'mt-3 inline-flex items-center gap-2 rounded-lg bg-secondary-500 px-3.5 py-2 text-sm font-semibold text-white transition-colors hover:bg-secondary-600';
+
+const SERVICES = [
+  {
+    icon: ClipboardCheck,
+    title: 'Case triage',
+    detail:
+      'We review your report within 24 hours, flag immediate risks, and tell you the first steps to protect remaining funds and accounts.',
+  },
+  {
+    icon: FolderOpen,
+    title: 'Evidence case file',
+    detail:
+      'We organize transaction records, wallet addresses, platform logs, and messages into a clear, chronological case file.',
+  },
+  {
+    icon: Route,
+    title: 'Transaction tracing',
+    detail:
+      'We trace how funds moved across wallets, exchanges, and payment processors to find actionable recovery paths.',
+  },
+  {
+    icon: Landmark,
+    title: 'Escalation support',
+    detail:
+      'We prepare evidence packets for bank disputes, exchange escalations, regulator complaints, and law-enforcement reports.',
+  },
+  {
+    icon: ShieldAlert,
+    title: 'Active-scam containment',
+    detail:
+      'If the scam is still happening, we guide you through steps to stop further losses and preserve evidence.',
+  },
+  {
+    icon: MessageSquareText,
+    title: 'Ongoing case updates',
+    detail:
+      'You get regular, clear updates while we follow up across every channel involved in your case.',
+  },
+];
 
 const FEATURED = {
   name: 'Margaret O.',
@@ -23,7 +76,7 @@ const FEATURED = {
   recovered: '$47,000',
   year: '2024',
   story:
-    'I invested $52,000 over eight months into what I was told was a licensed crypto arbitrage platform. They showed me a live dashboard with growing profits I could never actually withdraw. When I tried to exit, they demanded a \'tax clearance fee\' — that\u2019s when I knew. I found Sentinel through a victim support forum. Their team had seen this exact platform before, traced the wallet movement patterns, and built a complete evidence package. I got $47,000 back. I still can\u2019t fully believe it worked.',
+    'I invested $52,000 over eight months into what I was told was a licensed crypto arbitrage platform. They showed me a live dashboard with growing profits I could never actually withdraw. When I tried to exit, they demanded a \'tax clearance fee\' — that\u2019s when I knew. I found Ramp Recover through a victim support forum. Their team had seen this exact platform before, traced the wallet movement patterns, and built a complete evidence package. I got $47,000 back. I still can\u2019t fully believe it worked.',
 };
 
 const TESTIMONIALS = [
@@ -36,7 +89,7 @@ const TESTIMONIALS = [
     typeBadge: 'bg-warning-500/10 text-warning-500',
     recovered: '$23,500',
     excerpt:
-      'I put part of my retirement savings into what a colleague recommended as a regulated investment platform. Every withdrawal attempt was blocked by \u201cpending verification.\u201d Sentinel traced the domain and payment processors. I got the majority back.',
+      'I put part of my retirement savings into what a colleague recommended as a regulated investment platform. Every withdrawal attempt was blocked by \u201cpending verification.\u201d Ramp Recover traced the domain and payment processors. I got the majority back.',
   },
   {
     name: 'Sandra K.',
@@ -58,7 +111,7 @@ const TESTIMONIALS = [
     typeBadge: 'bg-error-500/10 text-error-500',
     recovered: '$89,200',
     excerpt:
-      'Our business was social-engineered into a fraudulent wire. The attacker had been reading our email thread for weeks before striking. The forensic report Sentinel produced was exactly what our insurer and FBI liaison needed to act.',
+      'Our business was social-engineered into a fraudulent wire. The attacker had been reading our email thread for weeks before striking. The forensic report Ramp Recover produced was exactly what our insurer and FBI liaison needed to act.',
   },
   {
     name: 'Liu W.',
@@ -69,7 +122,7 @@ const TESTIMONIALS = [
     typeBadge: 'bg-warning-500/10 text-warning-500',
     recovered: '$34,600',
     excerpt:
-      'A trading app showed SGD 180,000 in my account — all fake. Every withdrawal triggered a new fee. Sentinel had seen this scheme before and delivered full blockchain tracing in 12 days. A significant portion was recoverable.',
+      'A trading app showed SGD 180,000 in my account — all fake. Every withdrawal triggered a new fee. Ramp Recover had seen this scheme before and delivered full blockchain tracing in 12 days. A significant portion was recoverable.',
   },
   {
     name: 'Andrea B.',
@@ -80,7 +133,7 @@ const TESTIMONIALS = [
     typeBadge: 'bg-primary-600/10 text-primary-700',
     recovered: '$8,500',
     excerpt:
-      'A SIM swap drained my bank account before I noticed. Sentinel helped me document the telecom failure, escalate to AFCA, and negotiate a partial reimbursement faster than I imagined possible.',
+      'A SIM swap drained my bank account before I noticed. Ramp Recover helped me document the telecom failure, escalate to AFCA, and negotiate a partial reimbursement faster than I imagined possible.',
   },
   {
     name: 'David A.',
@@ -91,7 +144,7 @@ const TESTIMONIALS = [
     typeBadge: 'bg-primary-600/10 text-primary-700',
     recovered: '$61,000',
     excerpt:
-      'The broker had FCA registration numbers cloned from a legitimate firm. I\u2019d traded £48,000 into the account. Sentinel\u2019s evidence bundle was the key to my chargeback claim and regulator complaint. Settled in 11 weeks.',
+      'The broker had FCA registration numbers cloned from a legitimate firm. I\u2019d traded £48,000 into the account. Ramp Recover\u2019s evidence bundle was the key to my chargeback claim and regulator complaint. Settled in 11 weeks.',
   },
 ];
 
@@ -189,14 +242,14 @@ export default function Home() {
                 <ArrowRight className="h-4 w-4" />
               </a>
               <a
-                href="#proof"
+                href="#testimonials"
                 className="inline-flex items-center justify-center rounded-xl border border-primary-200 bg-white px-7 py-3.5 font-semibold text-primary-700 transition-all hover:border-primary-300 hover:bg-primary-50"
               >
                 See Recovery Results
               </a>
             </div>
 
-            <div id="proof" className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-3">
+            <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-3">
               <div className="rounded-2xl border border-primary-100 bg-white p-5 shadow-sm">
                 <div className="mb-2 inline-flex rounded-xl bg-primary-50 p-2 text-primary-700">
                   <Banknote className="h-5 w-5" />
@@ -217,8 +270,8 @@ export default function Home() {
                 <div className="mb-2 inline-flex rounded-xl bg-primary-50 p-2 text-primary-700">
                   <Clock3 className="h-5 w-5" />
                 </div>
-                <p className="text-2xl font-bold text-gray-900">48h</p>
-                <p className="text-sm text-gray-600">Average time to open and triage urgent cases</p>
+                <p className="text-2xl font-bold text-gray-900">24h</p>
+                <p className="text-sm text-gray-600">Follow-up on every new case</p>
               </div>
             </div>
           </div>
@@ -254,6 +307,35 @@ export default function Home() {
           </div>
         </section>
 
+        <section id="services" className="mx-auto w-full max-w-7xl px-4 pb-20 sm:px-6">
+          <div className="mb-10 max-w-3xl">
+            <span className="inline-flex items-center rounded-full border border-primary-100 bg-primary-50 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary-700">
+              What we do
+            </span>
+            <h2 className="mt-4 text-3xl font-bold text-gray-900 sm:text-4xl">
+              Recovery support from first report to final update
+            </h2>
+            <p className="mt-3 text-gray-700">
+              Every case follows the same structured workflow, from first containment steps to ongoing updates.
+            </p>
+          </div>
+
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {SERVICES.map(({ icon: Icon, title, detail }) => (
+              <article
+                key={title}
+                className="rounded-2xl border border-primary-100 bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-primary-200 hover:shadow-lg"
+              >
+                <div className="mb-4 inline-flex rounded-xl bg-primary-50 p-2.5 text-primary-700">
+                  <Icon className="h-5 w-5" />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900">{title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-gray-700">{detail}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
         <section id="scam-types" className="mx-auto w-full max-w-7xl px-4 pb-20 sm:px-6">
           <div className="rounded-3xl border border-primary-100 bg-white p-6 shadow-sm sm:p-10">
             <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
@@ -266,7 +348,7 @@ export default function Home() {
               </a>
             </div>
 
-            <div id="services" className="mt-8 grid gap-5 md:grid-cols-3">
+            <div className="mt-8 grid gap-5 md:grid-cols-3">
               <article className="group rounded-2xl border border-gray-100 bg-gray-50 p-5 transition-all hover:-translate-y-1 hover:border-primary-200 hover:bg-white hover:shadow-lg">
                 <div className="mb-3 inline-flex rounded-xl bg-warning-500/10 p-2 text-warning-500">
                   <Bitcoin className="h-5 w-5" />
@@ -466,6 +548,10 @@ export default function Home() {
                 <p className="mt-1 text-sm text-gray-700">
                   If the scam is still active, start live chat first. We will guide containment steps while your full case intake is being reviewed.
                 </p>
+                <OpenChat fallback={null} className={chatButtonClass}>
+                  <MessageCircleMore className="h-4 w-4" />
+                  Start live chat
+                </OpenChat>
               </div>
             </div>
 
@@ -510,7 +596,8 @@ export default function Home() {
             </h2>
             <p className="mt-3 text-gray-700">
               Complete the secure intake form below. Your information is used only for case review and recovery support.
-              If your situation is urgent, use live chat for immediate attention while your email intake is processed.
+              If your situation is urgent, <OpenChat className={chatLinkClass}>use live chat</OpenChat> for immediate attention
+              while your intake is processed.
             </p>
           </div>
 
@@ -534,84 +621,40 @@ export default function Home() {
                 </li>
               </ul>
 
+              <div className="mt-5 rounded-xl border border-secondary-500/20 bg-secondary-500/10 p-4 text-sm text-gray-800">
+                <p className="flex items-center gap-2 font-semibold text-gray-900">
+                  <ShieldCheck className="h-4 w-4 text-secondary-600" />
+                  Our promises to you
+                </p>
+                <ul className="mt-2 list-disc space-y-1 pl-5">
+                  <li>We never guarantee recovery.</li>
+                  <li>We never ask for payment in crypto or gift cards.</li>
+                  <li>We never ask for your passwords, seed phrases, or remote access to your devices.</li>
+                </ul>
+                <Link
+                  href="/risk-notice#recovery-scams"
+                  className="mt-3 inline-flex items-center gap-1 font-semibold text-primary-700 hover:text-primary-800"
+                >
+                  How to spot a recovery scam
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+
               <div className="mt-5 rounded-xl border border-warning-500/20 bg-warning-500/10 p-4 text-sm text-gray-800">
                 <p className="font-semibold text-gray-900">Urgent fraud in progress?</p>
                 <p className="mt-1">
                   Use live chat immediately so our team can guide next protective actions while your intake is reviewed.
                 </p>
+                <OpenChat fallback={null} className={chatButtonClass}>
+                  <MessageCircleMore className="h-4 w-4" />
+                  Open live chat
+                </OpenChat>
               </div>
             </aside>
           </div>
         </section>
 
-        <footer className="border-t border-gray-200 bg-white/80 backdrop-blur-sm">
-          <div className="mx-auto grid w-full max-w-7xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-[1.2fr_0.8fr_0.8fr_0.9fr]">
-            <div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary-100 bg-primary-50 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary-700">
-                <BadgeCheck className="h-3.5 w-3.5" />
-                Sentinel Recover
-              </div>
-              <p className="mt-4 max-w-sm text-sm leading-relaxed text-gray-700">
-                Professional scam recovery support for victims of crypto, payment, impersonation, and investment fraud.
-                We prioritize urgent containment and clear recovery communication.
-              </p>
-
-              <div className="mt-5 space-y-2 text-sm text-gray-700">
-                <p className="inline-flex items-center gap-2">
-                  <Mail className="h-4 w-4 text-primary-600" />
-                  support@sentinelrecover.com
-                </p>
-                <p className="inline-flex items-center gap-2">
-                  <Phone className="h-4 w-4 text-primary-600" />
-                  +1 (800) 123-4567
-                </p>
-                <p className="inline-flex items-center gap-2">
-                  <MessageCircleMore className="h-4 w-4 text-secondary-600" />
-                  Live chat available for urgent active scams
-                </p>
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-900">Quick Links</h3>
-              <ul className="mt-4 space-y-2 text-sm text-gray-700">
-                <li><a href="#services" className="hover:text-primary-700">Services</a></li>
-                <li><a href="#testimonials" className="hover:text-primary-700">Testimonials</a></li>
-                <li><a href="#process-faq" className="hover:text-primary-700">Process & FAQ</a></li>
-                <li><a href="#contact" className="hover:text-primary-700">Start Case Intake</a></li>
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-900">Scam Types</h3>
-              <ul className="mt-4 space-y-2 text-sm text-gray-700">
-                <li><a href="#scam-types" className="hover:text-primary-700">Crypto Wallet Fraud</a></li>
-                <li><a href="#scam-types" className="hover:text-primary-700">Investment Platform Scam</a></li>
-                <li><a href="#scam-types" className="hover:text-primary-700">Account Takeover</a></li>
-                <li><a href="#scam-types" className="hover:text-primary-700">Business Email Compromise</a></li>
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-900">Legal</h3>
-              <ul className="mt-4 space-y-2 text-sm text-gray-700">
-                <li><a href="/privacy-policy" className="hover:text-primary-700">Privacy Policy</a></li>
-                <li><a href="/terms-of-service" className="hover:text-primary-700">Terms of Service</a></li>
-                <li><a href="/disclaimer" className="hover:text-primary-700">Disclaimer</a></li>
-                <li><a href="/risk-notice" className="hover:text-primary-700">Risk Notice</a></li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="border-t border-gray-200">
-            <div className="mx-auto flex w-full max-w-7xl flex-col gap-2 px-4 py-5 text-xs text-gray-500 sm:px-6 md:flex-row md:items-center md:justify-between">
-              <p>© 2026 Sentinel Recover. All rights reserved.</p>
-              <p>
-                Recovery outcomes vary by case complexity, traceability, and third-party cooperation.
-              </p>
-            </div>
-          </div>
-        </footer>
+        <SiteFooter />
       </div>
     </main>
   );

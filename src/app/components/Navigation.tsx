@@ -3,7 +3,9 @@
 
 import { useEffect, useState, type ReactNode } from 'react';
 import Link from 'next/link';
-import { ArrowRight, Menu, Phone, ShieldCheck, X } from 'lucide-react';
+import { ArrowRight, Menu, Phone, X } from 'lucide-react';
+import BrandMark from '@/app/components/BrandMark';
+import { CONTACT, phoneHref } from '@/app/config/contact';
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,27 +27,29 @@ export default function Navigation() {
     }`}>
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
         <Link href="/" className="group flex items-center gap-3">
-          <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-linear-to-br from-primary-500 to-primary-700 text-white shadow-lg shadow-primary-500/25 transition-transform duration-300 group-hover:-translate-y-0.5">
-            <ShieldCheck className="h-6 w-6" />
-          </span>
+          <BrandMark className="h-11 w-11 shadow-lg shadow-primary-500/25 transition-transform duration-300 group-hover:-translate-y-0.5" />
           <span className="text-lg font-bold tracking-tight text-gray-900 sm:text-xl">
-            Sentinel Recover
+            Ramp <span className="text-primary-600">Recover</span>
           </span>
         </Link>
 
         <div className="hidden items-center gap-8 md:flex">
-          <NavLink href="#services">Services</NavLink>
-          <NavLink href="#scam-types">Scam Types</NavLink>
-          <NavLink href="#proof">Case Results</NavLink>
-          <NavLink href="#contact">Contact</NavLink>
+          <NavLink href="/#services">Services</NavLink>
+          <NavLink href="/#scam-types">Scam Types</NavLink>
+          <NavLink href="/#testimonials">Case Results</NavLink>
+          <NavLink href="/#contact">Contact</NavLink>
 
-          <div className="flex items-center gap-2 border-l border-primary-100 pl-6 text-sm text-gray-700">
+          <a
+            href={phoneHref}
+            title={`Call ${CONTACT.phone}`}
+            className="flex items-center gap-2 border-l border-primary-100 pl-6 text-sm text-gray-700 transition-colors hover:text-primary-600"
+          >
             <Phone className="h-4 w-4 text-primary-600" />
             <span className="font-semibold">24/7 Response</span>
-          </div>
+          </a>
 
           <Link
-            href="#contact"
+            href="/#contact"
             className="inline-flex items-center gap-2 rounded-xl bg-primary-600 px-5 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-primary-700 hover:shadow-lg hover:shadow-primary-500/20"
           >
             Free Case Review
@@ -66,12 +70,12 @@ export default function Navigation() {
       {isOpen && (
         <div className="mx-4 mb-4 rounded-2xl border border-primary-100 bg-white p-4 shadow-2xl md:hidden">
           <div className="flex flex-col gap-2">
-            <MobileNavLink href="#services" onClick={() => setIsOpen(false)}>Services</MobileNavLink>
-            <MobileNavLink href="#scam-types" onClick={() => setIsOpen(false)}>Scam Types</MobileNavLink>
-            <MobileNavLink href="#proof" onClick={() => setIsOpen(false)}>Case Results</MobileNavLink>
-            <MobileNavLink href="#contact" onClick={() => setIsOpen(false)}>Contact</MobileNavLink>
+            <MobileNavLink href="/#services" onClick={() => setIsOpen(false)}>Services</MobileNavLink>
+            <MobileNavLink href="/#scam-types" onClick={() => setIsOpen(false)}>Scam Types</MobileNavLink>
+            <MobileNavLink href="/#testimonials" onClick={() => setIsOpen(false)}>Case Results</MobileNavLink>
+            <MobileNavLink href="/#contact" onClick={() => setIsOpen(false)}>Contact</MobileNavLink>
             <Link
-              href="#contact"
+              href="/#contact"
               onClick={() => setIsOpen(false)}
               className="mt-2 inline-flex items-center justify-center rounded-xl bg-primary-600 px-4 py-3 text-sm font-semibold text-white"
             >
