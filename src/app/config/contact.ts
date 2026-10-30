@@ -2,9 +2,9 @@
 // the floating contact buttons, the legal pages and the Smartsupp live chat.
 export const CONTACT = {
   email: 'recover@getfinora.org',
-  phone: '+1 (207) 250-6231',
+  phone: '+1 (410) 870-7866',
   // International format, digits only: country code + number, no "+", spaces or dashes.
-  whatsapp: '12072506231',
+  whatsapp: '14108707866',
   whatsappMessage: 'Hi Ramp Recover, I need help with a scam case.',
   // Set NEXT_PUBLIC_SMARTSUPP_KEY in .env.local (and in the hosting provider's settings).
   // It's the `_smartsupp.key` value from Smartsupp → Settings → Chat box. Empty = no live chat on the site.

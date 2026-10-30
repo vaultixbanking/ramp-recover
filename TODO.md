@@ -11,7 +11,7 @@
   - **Render/Railway (backend):** everything from `backend/.env`, plus `CORS_ORIGINS=https://ramp-recover.getfinora.org` and `SITE_URL=https://ramp-recover.getfinora.org`.
 
 ### Details received (October 17, 2026)
-- [x] **Phone and WhatsApp:** +1 (207) 250-6231. Used in the footer, the header's "24/7 Response" link and the WhatsApp button (`src/app/config/contact.ts`).
+- [x] **Phone and WhatsApp:** +1 (410) 870-7866. Used in the footer, the header's "24/7 Response" link and the WhatsApp button (`src/app/config/contact.ts`).
 - [x] **Contact email:** recover@getfinora.org. Used in the Email button, the footer and the legal pages.
 - [x] **Smartsupp key:** in `.env.local` as `NEXT_PUBLIC_SMARTSUPP_KEY`. The old blocked key is gone.
 - [x] **Company:** Ramp Recover Inc, San Francisco, California, United States. The Terms are governed by California law, and case records are kept for 5 years (`src/app/config/legal.ts`).
